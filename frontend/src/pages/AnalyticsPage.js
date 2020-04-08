@@ -4,6 +4,8 @@ import {
     BarChart, Bar, XAxis, YAxis, 
     CartesianGrid, Tooltip, Legend,
   } from 'recharts';
+
+import './AnalyticsPage.css';
   
 const AnalyticsPage = props => {
     const hospital_name = "Stanford Hospital";
@@ -15,9 +17,9 @@ const AnalyticsPage = props => {
     ];
 
     const barData = [
-        { name: '2017', type_A: 30, type_B: 20, type_AB: 25, type_O: 10},
-        { name: '2018', type_A: 20, type_B: 40, type_AB: 55, type_O: 30},
-        { name: '2019', type_A: 80, type_B: 30, type_AB: 35, type_O: 20}
+        { name: '2017', "Type A": 30,"Type B": 20, "Type AB": 25, "Type O": 10},
+        { name: '2018', "Type A": 20,"Type B": 40, "Type AB": 55, "Type O": 30},
+        { name: '2019', "Type A": 80,"Type B": 30, "Type AB": 35, "Type O": 20}
     ]
 
     const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
@@ -38,12 +40,12 @@ const AnalyticsPage = props => {
     };
 
         return (
-        <div>
-            <div style={{margin:"auto", width:"50%", textAlign:"center"}}>
+        <div style={{position:"relative"}}>
+            <div className="centered">
                 <h1>{hospital_name}</h1>
             </div>
-            <div style={{width: "40%"}}>
-                <div>
+            <div style={{float:"left"}}>
+                <div className="centered">
                     <h3>Current Blood Types in {hospital_name} </h3>
                 </div>
                 <PieChart width={500} height={500}>
@@ -63,17 +65,26 @@ const AnalyticsPage = props => {
                     </Pie>
                 </PieChart>
             </div>
-            <div style={{width: "60%"}}>
-            <BarChart width={730} height={250} data={barData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="type_A" fill="#0088FE" />
-                <Bar dataKey="type_B" fill="#00C49F" />
-                <Bar dataKey="type_AB" fill="#FFBB28" />
-                <Bar dataKey="type_O" fill="#FF8042" />
+            <div style={{float:"left"}}>
+                <div className="centered">
+                    <h3>Units of Blood Type A, Type B, Type AB, and Type O </h3>
+                </div>
+                <BarChart width={730} height={500} data={barData}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="name" />
+                    <YAxis 
+                        label={{
+                             value: 'Units', 
+                             angle: -90, 
+                             position: 'insideLeft' 
+                        }}
+                    />
+                    <Tooltip />
+                    <Legend />
+                    <Bar dataKey="Type A" fill="#0088FE" />
+                    <Bar dataKey="Type B" fill="#00C49F" />
+                    <Bar dataKey="Type AB" fill="#FFBB28" />
+                    <Bar dataKey="Type O" fill="#FF8042" />
                 </BarChart>
             </div>
             
