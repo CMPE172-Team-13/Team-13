@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 
 import Table from "./components/Table";
+import AnalyticsPage from './pages/AnalyticsPage';
 
 function App() {
   return (
@@ -16,8 +17,11 @@ function App() {
       <div>
         <nav>
           <ul>
+          <li>
+              <Link to="/">Analytics</Link>
+            </li>
             <li>
-              <Link to="/">Donations</Link>
+              <Link to="/donations">Donations</Link>
             </li>
             <li>
               <Link to="/hospitals">Hospitals</Link>
@@ -35,8 +39,11 @@ function App() {
           <Route path="/sites">
             <Sites />
           </Route>
+          <Route path="/donations">
+            <Donations />
+          </Route>
           <Route path="/">
-            <Home />
+            <AnalyticsPage />
           </Route>
         </Switch>
       </div>
@@ -44,7 +51,7 @@ function App() {
   );
 }
 
-function Home() {
+function Donations() {
   return (
   <Table 
     fetchUrl="/api/donation" 
