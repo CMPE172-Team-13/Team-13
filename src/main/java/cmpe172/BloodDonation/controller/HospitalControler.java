@@ -50,4 +50,6 @@ public class HospitalControler {
 		hospitalService.save(hospital);
 		return hospital;
 	}
+	
+	
 }

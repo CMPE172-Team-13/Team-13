@@ -55,7 +55,7 @@ function Donations() {
   return (
   <Table 
     fetchUrl="/api/donation" 
-    labels={["donation_id","blood_type", "donation_number", "aDate"]}
+    labels={["donation_id","blood_type", "donation_number", "aDate", "site_id", "hospital_id"]}
   />);
 }
 
@@ -63,7 +63,7 @@ function Hospitals() {
   return (
     <Table 
       fetchUrl="/api/hospital" 
-      labels={["hospital_id","name", "location"]}
+      labels={["hospital_id","name", "location", "capacity"]}
     />);
 }
 
@@ -71,7 +71,7 @@ function Sites() {
   return (
     <Table 
       fetchUrl="/api/site" 
-      labels={["site_id","name", "location", "capacity"]}
+      labels={["site_id","name", "location"]}
     />);
 }
 export default App;

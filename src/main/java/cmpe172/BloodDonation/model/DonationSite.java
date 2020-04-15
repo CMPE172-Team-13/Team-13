@@ -1,10 +1,15 @@
 package cmpe172.BloodDonation.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity      
@@ -13,28 +18,29 @@ public class DonationSite {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer site_id;
+	@Column(name = "id")
+	private Integer id;
 
 	@Column
 	private String name;
 
 	@Column 
-	private String location;
+	private String location;	
 	
-	@Column
-	private Integer capacity;
+	@OneToMany(mappedBy = "site", cascade = CascadeType.ALL)
+	private List<Donation> donations;
 
 	@Override
 	public String toString() {
-		return "Donation site [id= " + site_id + ", name=" + name + ", location=" + location + ", capacity=" + capacity + "]";
+		return "Donation site [id= " + id + ", name=" + name + ", location=" + location + "]";
 	}
 
-	public Integer getSite_id() {
-		return site_id;
+	public Integer getId() {
+		return id;
 	}
 	
-	public void setSite_id(Integer site_id) {
-		this.site_id = site_id;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	
 	public String getName() {
@@ -51,13 +57,5 @@ public class DonationSite {
 	
 	public void setLocation(String location) {
 		this.location = location;
-	}
-	
-	public Integer getCapacity() {
-		return capacity;
-	}
-	
-	public void setCapacity(Integer capacity) {
-		this.capacity = capacity;
 	}
 }
