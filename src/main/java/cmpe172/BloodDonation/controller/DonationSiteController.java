@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import cmpe172.BloodDonation.service.DonationSiteService;
+import cmpe172.BloodDonation.model.Donation;
 import cmpe172.BloodDonation.model.DonationSite;
+import cmpe172.BloodDonation.model.Hospital;
 
 @RestController
 @RequestMapping("/api")
@@ -49,5 +51,20 @@ public class DonationSiteController {
 	public DonationSite update(@RequestBody DonationSite donationSite) {
 		donationSiteService.save(donationSite);
 		return donationSite;
+	}
+	
+	@GetMapping("/donationBySite/{site_id}")
+	public List<Donation> getDonationsBySiteId(@PathVariable int site_id){
+		return donationSiteService.getDonationsBySiteId(site_id);
+	}
+	
+	@GetMapping("/hospitalBySite/{site_id}")
+	public List<Hospital> getHospitalsBySiteId(@PathVariable int site_id){
+		return donationSiteService.getHospitalsBySiteId(site_id);
+	}
+	
+	@GetMapping("/site/{site_id}/{blood_type}")
+	public List<Donation> getDonationByBloodType(@PathVariable int site_id, @PathVariable String blood_type) {
+		return donationSiteService.getDonationByBloodType(site_id, blood_type);
 	}
 }

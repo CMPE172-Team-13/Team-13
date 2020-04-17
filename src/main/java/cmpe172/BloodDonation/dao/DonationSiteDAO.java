@@ -2,7 +2,9 @@ package cmpe172.BloodDonation.dao;
 
 import java.util.List;
 
+import cmpe172.BloodDonation.model.Donation;
 import cmpe172.BloodDonation.model.DonationSite;
+import cmpe172.BloodDonation.model.Hospital;
 
 public interface DonationSiteDAO {
 
@@ -14,4 +16,9 @@ public interface DonationSiteDAO {
 	
 	void delete(int site_id);
 	
+	public List<Donation> getDonationsBySiteId(int site_id);
+	
+	public List<Hospital> getHospitalsBySiteId(int site_id);
+	
+	public List<Donation> getDonationByBloodType(int site_id, String blood_type);
 }

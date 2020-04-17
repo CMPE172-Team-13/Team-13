@@ -13,5 +13,4 @@ public interface DonationService {
 	void save(Donation donation);
 	
 	void delete(int donation_id);
-
 }
