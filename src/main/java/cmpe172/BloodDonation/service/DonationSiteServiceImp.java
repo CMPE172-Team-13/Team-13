@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cmpe172.BloodDonation.dao.DonationSiteDAO;
+import cmpe172.BloodDonation.model.Donation;
 import cmpe172.BloodDonation.model.DonationSite;
+import cmpe172.BloodDonation.model.Hospital;
 
 @Service
 public class DonationSiteServiceImp implements DonationSiteService{
@@ -37,5 +39,20 @@ public class DonationSiteServiceImp implements DonationSiteService{
 	@Override
 	public void delete(int site_id) {
 		donationSiteDao.delete(site_id);
+	}
+
+	@Transactional
+	public List<Donation> getDonationsBySiteId(int site_id) {
+		return donationSiteDao.getDonationsBySiteId(site_id);
+	}
+
+	@Transactional
+	public List<Hospital> getHospitalsBySiteId(int site_id) {
+		return donationSiteDao.getHospitalsBySiteId(site_id);
 	}	
+	
+	@Transactional
+	public List<Donation> getDonationByBloodType(int site_id, String blood_type) {
+		return donationSiteDao.getDonationByBloodType(site_id, blood_type);
+	}
 }

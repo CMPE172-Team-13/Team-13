@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import cmpe172.BloodDonation.model.Donation;
-import cmpe172.BloodDonation.model.Hospital;
 
 @Repository
 public class DonationDAOImp implements DonationDAO{
@@ -45,5 +44,4 @@ public class DonationDAOImp implements DonationDAO{
 		Donation dono = currSession.get(Donation.class, donation_id);
 		currSession.delete(dono);
 	}
-	
 }

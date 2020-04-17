@@ -1,18 +1,19 @@
 package cmpe172.BloodDonation.model;
 
-//import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-//import java.sql.Date;		//did not work
-import java.time.*;			//also does not work
-//import java.util.Date;	//did not work
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "donation")
@@ -23,14 +24,20 @@ public class Donation {
 	@Column(name = "id")
 	private Integer id;
 		
+	//This is the foreign key mapping with site
 	@ManyToOne
 	@JoinColumn(name = "site_id", referencedColumnName = "id")
-	private DonationSite site;
+	private DonationSite site;		
 		
+	//This is the foreign key mapping with hospital
 	@ManyToOne
 	@JoinColumn(name = "hospital_id", referencedColumnName = "id")
 	private Hospital hospital;
-
+	
+	//here is the many-to-many mapping representing the donation_site relationship
+	@ManyToMany(mappedBy = "donationsViaSite")
+	private List<DonationSite> sites;
+		
 	@Column
 	private String blood_type;
 
@@ -38,8 +45,8 @@ public class Donation {
 	private String donation_number;
 	
 	@Column
-	//private java.sql.Date aDate;
-	private LocalDate aDate;
+	@Temporal(TemporalType.DATE)
+	private Date aDate;
 
 	@Override
 	public String toString() {
@@ -54,11 +61,6 @@ public class Donation {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
-//	public DonationSite getSite() {
-//		return site;
-//	}
-
 
 	public void setSite(DonationSite site) {
 		this.site = site;
@@ -67,11 +69,6 @@ public class Donation {
 	public Integer getSiteId() {
 		return site.getId();
 	}
-
-//	public Hospital getHospital() {
-//		return hospital;
-//	}
-
 
 	public void setHospital(Hospital hospital) {
 		this.hospital = hospital;
@@ -100,15 +97,18 @@ public class Donation {
 	}
 
 
-	public LocalDate getaDate() {
+	public Date getaDate() {
 		return aDate;
 	}
 
 
-	public void setaDate(LocalDate aDate) {
+	public void setaDate(Date aDate) {
 		this.aDate = aDate;
 	}
 	
-	
-
+	//returns the site that is associated with this donation via a join on the donation_site table, 
+	//but it is not required because we already have the site_id via the foreign key
+//	public Integer getSiteViaDonation() {
+//		return sites.get(0).getId();
+//	}
 }

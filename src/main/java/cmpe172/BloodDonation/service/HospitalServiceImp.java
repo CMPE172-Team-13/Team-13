@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import cmpe172.BloodDonation.dao.HospitalDAO;
+import cmpe172.BloodDonation.model.Donation;
+import cmpe172.BloodDonation.model.DonationSite;
 import cmpe172.BloodDonation.model.Hospital;
 
 @Service
@@ -39,4 +41,13 @@ public class HospitalServiceImp implements HospitalService{
 		hospitalDao.delete(hospital_id);
 	}
 
+	@Transactional
+	public DonationSite getDonationSiteByHospitalId(int hospital_id) {
+		return hospitalDao.getDonationSiteByHospitalId(hospital_id);
+	}
+
+	@Transactional
+	public List<Donation> getDonationByBloodType(int hospital_id, String blood_type){
+		return hospitalDao.getDonationByBloodType(hospital_id, blood_type);
+	}
 }
