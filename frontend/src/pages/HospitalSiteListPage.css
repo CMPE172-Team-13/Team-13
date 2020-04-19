@@ -1,0 +1,52 @@
+.tab-container{
+    float: left;
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-bottom: 10px;
+}
+
+.tab{
+    width: 25%;
+    float: left;
+    text-align: center;
+    cursor: pointer;
+    color: white;
+}
+
+.tab-inactive {
+    background-color: lightskyblue;
+}
+
+.tab-active {
+    background-color: cornflowerblue;
+}
+
+#first-tab{
+    margin-left: 25%;
+    border-right: black solid 1px;
+}
+
+.centered {
+    margin: auto;
+    width: 50%; 
+    text-Align: center;
+}
+
+.pagination-container {
+    margin-left: 40%;
+    margin-top: 10px;
+}
+
+th{
+    background-color: cornflowerblue;
+    color: white;
+}
+
+.row{
+    background-color: lightsteelblue;
+}
+
+.alternate-row {
+    background-color: lightblue;
+}
