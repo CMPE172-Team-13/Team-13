@@ -10,6 +10,9 @@ import {
 
 import Table from "./components/Table";
 import AnalyticsPage from './pages/AnalyticsPage';
+import HeaderMenu from './components/HeaderMenu';
+import HospitalSiteListPage from './pages/HospitalSiteListPage';
+import AddDonationPage from './pages/AddDonationPage';
 
 function App() {
   return (
@@ -29,8 +32,16 @@ function App() {
             <li>
               <Link to="/sites">Sites</Link>
             </li>
+            <li>
+              <Link to="/addDonation">Add Donation</Link>
+            </li>
+            <li>
+              <Link to="/list">Hospital and Site Lists</Link>
+            </li>
           </ul>
         </nav>
+
+        <HeaderMenu/>
 
         <Switch>
           <Route path="/hospitals">
@@ -39,8 +50,14 @@ function App() {
           <Route path="/sites">
             <Sites />
           </Route>
+          <Route path="/addDonation">
+        	<AddDonationPage />
+	      </Route>
           <Route path="/donations">
             <Donations />
+          </Route>
+          <Route path="/list">
+            <HospitalSiteListPage/>
           </Route>
           <Route path="/">
             <AnalyticsPage />

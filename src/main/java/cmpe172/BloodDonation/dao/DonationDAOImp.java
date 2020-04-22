@@ -35,7 +35,7 @@ public class DonationDAOImp implements DonationDAO{
 	@Override
 	public void save(Donation donation) {
 		Session currSession = entityManager.unwrap(Session.class);
-		currSession.saveOrUpdate(donation);		
+		currSession.save(donation);		
 	}
 
 	@Override
