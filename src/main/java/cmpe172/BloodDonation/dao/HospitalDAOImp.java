@@ -75,4 +75,18 @@ public class HospitalDAOImp implements HospitalDAO{
 				.getResultList();
 		return d;
 	}
+
+	/**
+	 * This returns the donations from hospital with id given by hospital_id
+	 * @param hospital_id the id of the hospital
+	 * @return a list of donations that are present at the hospital
+	 */
+	public List<Donation> getDonationByHospitalId(int hospital_id) {
+		Session currSession = entityManager.unwrap(Session.class);
+		List<Donation> d = currSession.createNativeQuery(
+				"SELECT * FROM donation WHERE hospital_id = :hospital_id", Donation.class)
+				.setParameter("hospital_id", hospital_id)				
+				.getResultList();
+		return d;
+	}
 }

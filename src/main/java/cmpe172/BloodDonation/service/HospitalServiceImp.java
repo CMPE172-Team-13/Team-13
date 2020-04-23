@@ -50,4 +50,9 @@ public class HospitalServiceImp implements HospitalService{
 	public List<Donation> getDonationByBloodType(int hospital_id, String blood_type){
 		return hospitalDao.getDonationByBloodType(hospital_id, blood_type);
 	}
+
+	@Override
+	public List<Donation> getDonationByHospitalId(int hospital_id) {		
+		return hospitalDao.getDonationByHospitalId(hospital_id);
+	}
 }

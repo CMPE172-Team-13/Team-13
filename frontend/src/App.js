@@ -12,7 +12,7 @@ import Table from "./components/Table";
 import AnalyticsPage from './pages/AnalyticsPage';
 import HeaderMenu from './components/HeaderMenu';
 import HospitalSiteListPage from './pages/HospitalSiteListPage';
-import AddDonationPage from './pages/AddDonationPage';
+import AddDonationPage from './pages/addDonationPage';
 
 function App() {
   return (

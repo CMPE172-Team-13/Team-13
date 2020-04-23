@@ -1,17 +1,17 @@
 package cmpe172.BloodDonation.model;
 
 import java.util.List;
-import java.util.Set;
-import java.util.HashSet;
+//import java.util.Set;
+//import java.util.HashSet;
 
-import javax.persistence.CascadeType;
+//import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
+//import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -32,9 +32,9 @@ public class Hospital {
 	@Column
 	private Integer capacity;
 	
-	//This is the foreign key mapping in Donation
-	@OneToMany(mappedBy = "hospital", cascade = CascadeType.ALL)
-	private List<Donation> donations;	
+//	//This is the foreign key mapping in Donation
+//	@OneToMany(mappedBy = "hospital", cascade = CascadeType.ALL)
+//	private List<Donation> donations;	
 	
 	//This is the many-to-many mapping that represents the site_hospital relationship
 	@ManyToMany(mappedBy = "hospitals")
@@ -98,16 +98,16 @@ public class Hospital {
 	 * 
 	 * NOTE: I use 'acquire' as opposed to 'get' to not return the donation ids in the JSON - I do not know how to ignore them otherwise
 	 */
-	public Set<Integer> acquireDonations(){
-		Set<Integer> donation_ids = new HashSet<>();
-		for(Donation d : donations) {
-			donation_ids.add(d.getId());
-		}
-		return donation_ids;
-	}	
+//	public Set<Integer> acquireDonations(){
+//		Set<Integer> donation_ids = new HashSet<>();
+//		for(Donation d : donations) {
+//			donation_ids.add(d.getId());
+//		}
+//		return donation_ids;
+//	}	
 
-	public void setDonations(List<Donation> donations) {
-		this.donations = donations;
-	}
+//	public void setDonations(List<Donation> donations) {
+//		this.donations = donations;
+//	}
 
 }

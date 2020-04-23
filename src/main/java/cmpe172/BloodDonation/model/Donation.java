@@ -2,6 +2,7 @@ package cmpe172.BloodDonation.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,6 +12,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import com.fasterxml.jackson.annotation.*;
 
 import java.util.Date;
 import java.util.List;
@@ -25,15 +31,23 @@ public class Donation {
 	private Integer id;
 		
 	//This is the foreign key mapping with site
-	@ManyToOne
-	@JoinColumn(name = "site_id", referencedColumnName = "id")
-	private DonationSite site;		
-		
-	//This is the foreign key mapping with hospital
-	@ManyToOne
-	@JoinColumn(name = "hospital_id", referencedColumnName = "id")
-	private Hospital hospital;
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "site_id", referencedColumnName = "id", nullable = false)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+//	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+//    @JsonIdentityReference(alwaysAsId=true)
+//    @JsonProperty("site_id")
+	private DonationSite site;				
 	
+	//This is the foreign key mapping with hospital
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "hospital_id", referencedColumnName = "id", nullable = false)
+	@OnDelete(action = OnDeleteAction.CASCADE)
+//	@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+//    @JsonIdentityReference(alwaysAsId=true)
+//    @JsonProperty("hospital_id")
+	private Hospital hospital;
+			
 	//here is the many-to-many mapping representing the donation_site relationship
 	@ManyToMany(mappedBy = "donationsViaSite")
 	private List<DonationSite> sites;
@@ -52,7 +66,6 @@ public class Donation {
 	public String toString() {
 		return "Donation [id= " + id + "site_id=" + site.getId() + ", hospital_id=" + hospital.getId() + ", blood_type=" + blood_type + ", donation_number=" + donation_number + ", aDate=" + aDate + "]";
 	}
-
 	
 	public Integer getId() {
 		return id;
@@ -83,7 +96,6 @@ public class Donation {
 		return blood_type;
 	}	
 
-
 	public void setBlood_type(String blood_type) {
 		this.blood_type = blood_type;
 	}
@@ -96,11 +108,9 @@ public class Donation {
 		this.donation_number = donation_number;
 	}
 
-
 	public Date getaDate() {
 		return aDate;
 	}
-
 
 	public void setaDate(Date aDate) {
 		this.aDate = aDate;

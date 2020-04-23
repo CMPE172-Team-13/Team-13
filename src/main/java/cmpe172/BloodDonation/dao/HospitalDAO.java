@@ -20,4 +20,6 @@ public interface HospitalDAO {
 			
 	public List<Donation> getDonationByBloodType(int hospital_id, String blood_type);
 	
+	public List<Donation> getDonationByHospitalId(int hospital_id);
+	
 }
