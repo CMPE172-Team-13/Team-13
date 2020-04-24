@@ -76,19 +76,25 @@ const AddDonationPage = props => {
 	};
 	
 	async function postDonation(toInput) {
-		const response = await fetch("/api/donation", {
-			method: "POST", // *GET, POST, PUT, DELETE, etc.
-			mode: "cors", // no-cors, *cors, same-origin
-			cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-			credentials: "same-origin", // include, *same-origin, omit
-			headers: {
-				"Content-Type": "application/json"
-					// 'Content-Type': 'application/x-www-form-urlencoded',
-			},
-			redirect: "follow", // manual, *follow, error
-			referrerPolicy: "no-referrer", // no-referrer, *client
-			body: JSON.stringify(toInput) // body data type must match "Content-Type" header
-		});
+		const response = await fetch("/api/donation/" + toInput.site_id +
+				"/" + toInput.hospital_id +
+				"/" + toInput.blood_type +
+				"/" + toInput.donation_number +
+				"/" + toInput.aDate,
+				{ method: "POST"});
+//		const response = await fetch("/api/donation", {
+//			method: "POST", // *GET, POST, PUT, DELETE, etc.
+//			mode: "cors", // no-cors, *cors, same-origin
+//			cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+//			credentials: "same-origin", // include, *same-origin, omit
+//			headers: {
+//				"Content-Type": "application/json"
+//					// 'Content-Type': 'application/x-www-form-urlencoded',
+//			},
+//			redirect: "follow", // manual, *follow, error
+//			referrerPolicy: "no-referrer", // no-referrer, *client
+//			body: JSON.stringify(toInput) // body data type must match "Content-Type" header
+//		});
 		let body = await response.json();
 		console.log(body.id);
 		setMessage(body.id ? "Data sucessfully updated" : "Data failed to update");
