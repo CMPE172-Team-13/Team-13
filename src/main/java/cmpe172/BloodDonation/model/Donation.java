@@ -48,7 +48,7 @@ public class Donation {
 	
 	@Override
 	public String toString() {
-		return "Donation [id= " + id + " site_id=" + site_id/*site.getId()*/ + ", hospital_id=" + hospital_id/*hospital.getId()*/ + ", blood_type=" + blood_type + ", donation_number=" + donation_number + ", aDate=" + aDate + "]";
+		return "Donation [id= " + id + " site_id=" + site_id + ", hospital_id=" + hospital_id + ", blood_type=" + blood_type + ", donation_number=" + donation_number + ", aDate=" + aDate + "]";
 	}
 	
 	public Integer getId() {

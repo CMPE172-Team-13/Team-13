@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cmpe172.BloodDonation.service.DonationService;
 import cmpe172.BloodDonation.model.Donation;
+import cmpe172.BloodDonation.model.DonationToSite;
 
 @RestController
 @RequestMapping("/api")
@@ -37,7 +38,12 @@ public class DonationController {
 			@PathVariable String bloodType,
 			@PathVariable String donationNum,
 			@PathVariable String date) throws ParseException {
+
+		Donation lastDonation = donationService.getLast();
+		Integer newDonationId = lastDonation.getId() + 1;
+		
 		Donation donation = new Donation();
+		donation.setId(newDonationId);
 		donation.setSite(siteId);
 		donation.setHospital(hospitalId);
 		donation.setBlood_type(bloodType);
@@ -45,7 +51,12 @@ public class DonationController {
 		donation.setaDate(new SimpleDateFormat("yyyy-MM-dd").parse(date));
 		
 		//System.out.println("\nDEBUG MESSAGE: JSON donation in controller " + donation + "\n");
-		donationService.save(donation);
+		
+		DonationToSite donationSiteInfo = new DonationToSite();
+		donationSiteInfo.setSiteId(siteId);
+		donationSiteInfo.setDonationId(newDonationId);//donation_id
+
+		donationService.save(donation, donationSiteInfo);
 		return donation;
 	}
 
@@ -60,9 +71,9 @@ public class DonationController {
 		return "Donation removed with id " + donation_id;		
 	}
 	
-	@PutMapping("/donation")
-	public Donation update(@RequestBody Donation donation) {
-		donationService.save(donation);
-		return donation;
-	}
+//	@PutMapping("/donation")
+//	public Donation update(@RequestBody Donation donation) {
+//		donationService.save(donation);
+//		return donation;
+//	}
 }

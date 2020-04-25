@@ -3,6 +3,7 @@ package cmpe172.BloodDonation.dao;
 import java.util.List;
 
 import cmpe172.BloodDonation.model.Donation;
+import cmpe172.BloodDonation.model.DonationToSite;
 
 public interface DonationDAO {
 
@@ -10,7 +11,9 @@ public interface DonationDAO {
 	
 	Donation get(int donation_id);
 	
-	void save(Donation donation);
+	Donation getLast();
+	
+	void save(Donation donation, DonationToSite donationInfo);
 	
 	void delete(int donation_id);
 	}

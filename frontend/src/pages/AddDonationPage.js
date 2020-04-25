@@ -172,39 +172,42 @@ const AddDonationPage = props => {
 								/>
 							</Grid>
 							<Grid item xs={12} sm={6}>
-							<Select
-								variant="outlined"
-								required
-								fullWidth
-								label="Hospital"
-								autoComplete="Hospital"
-								labelId="hospitalsMenuLabel"
-								id="hospitalsMenu"
-								value={hospital_id}
-								onChange={handleHospitalChange}
-							>
-								{hospitals?.map(hospital => (
-									<MenuItem value={hospital.id}>
-										{hospital.name}
-									</MenuItem>
-								))}
-							</Select>
-							</Grid>
-							<Grid item xs={12} sm={6}>
-								<TextField
+								<Select
 									variant="outlined"
 									required
 									fullWidth
+									label="Hospital"
+									autoComplete="Hospital"
+									labelId="hospitalsMenuLabel"
+									id="hospitalsMenu"
+									value={hospital_id}
+									onChange={handleHospitalChange}
+								>
+									{hospitals?.map(hospital => (
+										<MenuItem value={hospital.id}>
+											{hospital.name}
+										</MenuItem>
+									))}
+								</Select>
+							</Grid>
+							<Grid item xs={12} sm={6}>
+								<Select
+									variant="outlined"
+									required
+									fullWidth
+									label="bloodType"
+									autoComplete="Blood Type"
+									labelId="Blood Type"
 									id="bloodType"
 									value={blood_type}
-									label="Blood Type"
-									name="bloodType"
-									autoComplete="Blood Type"
 									onChange={handleBloodTypeChange}
-									onInput={(input) => {
-										input.target.value = input.target.value.slice(0, 2);
-									}}
-								/>
+								>
+									{['A', 'B', 'AB', 'O']?.map(bloodType => (
+										<MenuItem value={bloodType}>
+											{bloodType}
+										</MenuItem>
+									))}
+								</Select>
 							</Grid>
 						</Grid>
 						<Button
