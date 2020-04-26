@@ -38,24 +38,22 @@ public class DonationController {
 			@PathVariable String bloodType,
 			@PathVariable String donationNum,
 			@PathVariable String date) throws ParseException {
-
-		Donation lastDonation = donationService.getLast();
-		Integer newDonationId = lastDonation.getId() + 1;
 		
 		Donation donation = new Donation();
-		donation.setId(newDonationId);
 		donation.setSite(siteId);
 		donation.setHospital(hospitalId);
 		donation.setBlood_type(bloodType);
 		donation.setDonation_number(donationNum);
 		donation.setaDate(new SimpleDateFormat("yyyy-MM-dd").parse(date));
 		
-		//System.out.println("\nDEBUG MESSAGE: JSON donation in controller " + donation + "\n");
+		System.out.println("\nDEBUG MESSAGE: JSON donation in controller " + donation + "\n");
 		
 		DonationToSite donationSiteInfo = new DonationToSite();
 		donationSiteInfo.setSiteId(siteId);
-		donationSiteInfo.setDonationId(newDonationId);//donation_id
+		donationSiteInfo.setDonationId(0);//donation_id
 
+		System.out.println("\nDEBUG MESSAGE: JSON donationSiteInfo in controller " + donationSiteInfo + "\n");
+		
 		donationService.save(donation, donationSiteInfo);
 		return donation;
 	}

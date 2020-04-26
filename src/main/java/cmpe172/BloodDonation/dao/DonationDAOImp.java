@@ -1,5 +1,6 @@
 package cmpe172.BloodDonation.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -46,7 +47,9 @@ public class DonationDAOImp implements DonationDAO{
 	@Override
 	public void save(Donation donation, DonationToSite donationInfo) {
 		Session currSession = entityManager.unwrap(Session.class);
-		currSession.save(donation);
+		Serializable serial = currSession.save(donation);
+		donationInfo.setDonationId((int)serial);
+		//System.out.println(donationInfo);
 		currSession.save(donationInfo);
 	}
 
