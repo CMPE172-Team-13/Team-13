@@ -103,7 +103,14 @@ const HospitalSiteListPage = props => {
                                         <td className={index%2 === 1 ? "alternate-row" :"row"} key={value}>{value}</td>
                                     ))}
                                     <td className={index%2 === 1 ? "alternate-row" :"row"}>
-                                        <button onClick={() => {history.push("/");}}>
+                                        <button 
+                                            onClick={() => {
+                                                if(selectedIndex == 0){
+                                                    history.push(`/?type=hospital&name=${row.name}&id=${row.id}`);
+                                                } else {
+                                                    history.push(`/?type=site&name=${row.name}&id=${row.id}`);
+                                                }
+                                            }}>
                                             View Analytics
                                         </button>
                                     </td>
