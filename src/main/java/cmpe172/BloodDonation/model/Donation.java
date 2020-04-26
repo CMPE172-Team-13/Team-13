@@ -23,16 +23,12 @@ public class Donation {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
-		
-	//This is the foreign key mapping with site
-	@ManyToOne
-	@JoinColumn(name = "site_id", referencedColumnName = "id")
-	private DonationSite site;		
-		
-	//This is the foreign key mapping with hospital
-	@ManyToOne
-	@JoinColumn(name = "hospital_id", referencedColumnName = "id")
-	private Hospital hospital;
+	
+	@Column(name = "site_id")
+	private Integer site_id;
+	
+	@Column(name = "hospital_id")
+	private Integer hospital_id;
 	
 	//here is the many-to-many mapping representing the donation_site relationship
 	@ManyToMany(mappedBy = "donationsViaSite")
@@ -48,11 +44,12 @@ public class Donation {
 	@Temporal(TemporalType.DATE)
 	private Date aDate;
 
+	
+	
 	@Override
 	public String toString() {
-		return "Donation [id= " + id + "site_id=" + site.getId() + ", hospital_id=" + hospital.getId() + ", blood_type=" + blood_type + ", donation_number=" + donation_number + ", aDate=" + aDate + "]";
+		return "Donation [id= " + id + " site_id=" + site_id + ", hospital_id=" + hospital_id + ", blood_type=" + blood_type + ", donation_number=" + donation_number + ", aDate=" + aDate + "]";
 	}
-
 	
 	public Integer getId() {
 		return id;
@@ -62,27 +59,26 @@ public class Donation {
 		this.id = id;
 	}
 
-	public void setSite(DonationSite site) {
-		this.site = site;
+	public void setSite(int id) {
+		this.site_id = id;//site.getId();
 	}
 	
 	public Integer getSiteId() {
-		return site.getId();
+		//System.out.println("\nDEBUG MESSAGE from donation model: " + this + "\n");
+		return this.site_id;
 	}
 
-	public void setHospital(Hospital hospital) {
-		this.hospital = hospital;
+	public void setHospital(int id) {
+		this.hospital_id = id;
 	}
 	
 	public Integer getHospitalId() {
-		return hospital.getId();
+		return this.hospital_id;
 	}
 
- 
 	public String getBlood_type() {
 		return blood_type;
 	}	
-
 
 	public void setBlood_type(String blood_type) {
 		this.blood_type = blood_type;
@@ -96,19 +92,12 @@ public class Donation {
 		this.donation_number = donation_number;
 	}
 
-
 	public Date getaDate() {
 		return aDate;
 	}
-
 
 	public void setaDate(Date aDate) {
 		this.aDate = aDate;
 	}
 	
-	//returns the site that is associated with this donation via a join on the donation_site table, 
-	//but it is not required because we already have the site_id via the foreign key
-//	public Integer getSiteViaDonation() {
-//		return sites.get(0).getId();
-//	}
 }

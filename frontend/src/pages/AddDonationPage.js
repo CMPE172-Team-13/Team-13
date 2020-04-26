@@ -44,26 +44,23 @@ const AddDonationPage = props => {
 	const classes = useStyles();
 	const [firstLoad, setLoad] = React.useState(true);
 	
-	//const [id, setId] = React.useState("101");
 	const [todaysDate, setTodaysDate] = React.useState("");
 	const [blood_type, setBloodType] = React.useState("");
-	const [donation_number, setDonationNum] = React.useState("");
 	const [site_id, setSiteId] = React.useState("");
 	const [hospital_id, setHospitalId] = React.useState("");
 	
+	const [donationSites, setDonationSites] = React.useState([]);
 	const [hospitals, setHospitals] = React.useState([]);
 	let isLoading = true;
 	
 	// Used for debugging
 	const [message, setMessage] = React.useState("Nothing saved in the session");
-	
-	//const handleIdChange = event => setId(event.target.value);
-	//const handleDateChange = date => setTodaysDate(date);
+
 	const handleBloodTypeChange = event => setBloodType(event.target.value);
-	const handleDonationNumChange = event => setDonationNum(event.target.value);
 	
 	const handleSiteChange = event => {
 		setSiteId(event.target.value);
+		getHospitals(event.target.value);
 	}
 	
 	const handleHospitalChange = event => {
@@ -71,36 +68,59 @@ const AddDonationPage = props => {
 	}
 	
 	const handleSubmit = variables => {
+		var donation_number = makeid(10);
 		const toInput = { site_id, hospital_id, blood_type, donation_number, aDate: todaysDate };
 		postDonation(toInput);
 	};
 	
 	async function postDonation(toInput) {
-		const response = await fetch("/api/donation", {
-			method: "POST", // *GET, POST, PUT, DELETE, etc.
-			mode: "cors", // no-cors, *cors, same-origin
-			cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-			credentials: "same-origin", // include, *same-origin, omit
-			headers: {
-				"Content-Type": "application/json"
-					// 'Content-Type': 'application/x-www-form-urlencoded',
-			},
-			redirect: "follow", // manual, *follow, error
-			referrerPolicy: "no-referrer", // no-referrer, *client
-			body: JSON.stringify(toInput) // body data type must match "Content-Type" header
-		});
+		const response = await fetch("/api/donation/" + toInput.site_id +
+				"/" + toInput.hospital_id +
+				"/" + toInput.blood_type +
+				"/" + toInput.donation_number +
+				"/" + toInput.aDate,
+				{ method: "POST"});
+//		const response = await fetch("/api/donation", {
+//			method: "POST", // *GET, POST, PUT, DELETE, etc.
+//			mode: "cors", // no-cors, *cors, same-origin
+//			cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+//			credentials: "same-origin", // include, *same-origin, omit
+//			headers: {
+//				"Content-Type": "application/json"
+//					// 'Content-Type': 'application/x-www-form-urlencoded',
+//			},
+//			redirect: "follow", // manual, *follow, error
+//			referrerPolicy: "no-referrer", // no-referrer, *client
+//			body: JSON.stringify(toInput) // body data type must match "Content-Type" header
+//		});
 		let body = await response.json();
 		console.log(body.id);
 		setMessage(body.id ? "Data sucessfully updated" : "Data failed to update");
 	}
 	
-	async function getHospitals() {
-		let response = await fetch("/api/hospital");
+	async function getDonationSites() {
+		let response = await fetch("/api/site");
+		let body = await response.json();
+		setDonationSites(body);
+	}
+
+	async function getHospitals(siteId) {
+		let response = await fetch("/api/hospitalBySite/" + siteId);
 		let body = await response.json();
 		setHospitals(body);
 		//console.log("DEBUG: got the hospitals: " + body);
 	}
-
+	
+	function makeid(length) {
+	   var result           = '';
+	   var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+	   var charLength = characters.length;
+	   for ( var i = 0; i < length; i++ ) {
+	      result += characters.charAt(Math.floor(Math.random() * charLength));
+	   }
+	   return result;
+	}
+	
 	if (firstLoad) {
 		console.log("DEBUG: This is first load.");
 		
@@ -109,14 +129,11 @@ const AddDonationPage = props => {
 					("0" + (today.getMonth() + 1)) + "-" +
 					("0" + today.getDate()).slice(-2);
 		setTodaysDate(date);
-		
-		// Test getting hospitals
-		getHospitals();
-		
+		getDonationSites();
 		setLoad(false);
 	}
 	
-	if (hospitals.length > 0) isLoading = false;
+	if (donationSites.length > 0) isLoading = false;
 	
 	return (
 			<Container component="main" maxWidth="xs">
@@ -134,23 +151,7 @@ const AddDonationPage = props => {
 					<form className={classes.form} noValidate>
 						<Grid container spacing={2}>
 							<Grid item xs={12}>
-								<TextField
-									variant="outlined"
-									required
-									fullWidth
-									id="donationNum"
-									value={donation_number}
-									label="Donation Number"
-									name="name"
-									autoComplete="Donation Number"
-									onChange={handleDonationNumChange}
-									onInput={(input) => {
-										input.target.value = input.target.value.slice(0, 10);
-									}}
-								/>
-							</Grid>
-							<Grid item xs={12}>
-								<TextField
+								<Select
 									variant="outlined"
 									required
 									fullWidth
@@ -160,45 +161,53 @@ const AddDonationPage = props => {
 									name="name"
 									autoComplete="Site ID"
 									onChange={handleSiteChange}
-									onInput={(input) => {
-										input.target.value = input.target.value.slice(0, 11);
-									}}
-								/>
+								>
+									{donationSites?.map(donationSite => (
+										<MenuItem value={donationSite.id}>
+											{donationSite.name}
+										</MenuItem>
+									))}
+								</Select>
 							</Grid>
-							<Grid item xs={12} sm={6}>
-							<Select
-								variant="outlined"
-								required
-								fullWidth
-								label="Hospital"
-								autoComplete="Hospital"
-								labelId="hospitalsMenuLabel"
-								id="hospitalsMenu"
-								value={hospital_id}
-								onChange={handleHospitalChange}
-							>
-								{hospitals?.map(hospital => (
-									<MenuItem value={hospital.id}>
-										{hospital.name}
-									</MenuItem>
-								))}
-							</Select>
+							<Grid item xs={12}>
+								<InputLabel htmlFor="hospital-label">Hospital</InputLabel>
+									<Select
+										variant="outlined"
+										required
+										fullWidth
+										label="Hospital"
+										autoComplete="Hospital"
+										labelId="hospitalsMenuLabel"
+										id="hospitalsMenu"
+										value={hospital_id}
+										onChange={handleHospitalChange}
+									>
+										{hospitals?.map(hospital => (
+											<MenuItem value={hospital.id}>
+												{hospital.name}
+											</MenuItem>
+										))}
+									</Select>
 							</Grid>
-							<Grid item xs={12} sm={6}>
-								<TextField
-									variant="outlined"
-									required
-									fullWidth
-									id="bloodType"
-									value={blood_type}
-									label="Blood Type"
-									name="bloodType"
-									autoComplete="Blood Type"
-									onChange={handleBloodTypeChange}
-									onInput={(input) => {
-										input.target.value = input.target.value.slice(0, 2);
-									}}
-								/>
+							<Grid item xs={12}>
+								<InputLabel htmlFor="blood-label">Blood Type</InputLabel>
+									<Select
+										variant="outlined"
+										required
+										fullWidth
+										label="bloodType"
+										autoComplete="Blood Type"
+										labelId="Blood Type"
+										id="bloodType"
+										value={blood_type}
+										onChange={handleBloodTypeChange}
+									>
+										{['A', 'B', 'AB', 'O']?.map(bloodType => (
+											<MenuItem value={bloodType}>
+												{bloodType}
+											</MenuItem>
+										))}
+									</Select>
 							</Grid>
 						</Grid>
 						<Button
