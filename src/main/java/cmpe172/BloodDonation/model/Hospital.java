@@ -33,8 +33,8 @@ public class Hospital {
 	private Integer capacity;
 	
 	//This is the foreign key mapping in Donation
-	@OneToMany(mappedBy = "hospital", cascade = CascadeType.ALL)
-	private List<Donation> donations;	
+//	@OneToMany(mappedBy = "hospital", cascade = CascadeType.ALL)
+//	private List<Donation> donations;	
 	
 	//This is the many-to-many mapping that represents the site_hospital relationship
 	@ManyToMany(mappedBy = "hospitals")
@@ -100,14 +100,14 @@ public class Hospital {
 	 */
 	public Set<Integer> acquireDonations(){
 		Set<Integer> donation_ids = new HashSet<>();
-		for(Donation d : donations) {
-			donation_ids.add(d.getId());
-		}
+//		for(Donation d : donations) {
+//			donation_ids.add(d.getId());
+//		}
 		return donation_ids;
 	}	
 
 	public void setDonations(List<Donation> donations) {
-		this.donations = donations;
+		//this.donations = donations;
 	}
 
 }
