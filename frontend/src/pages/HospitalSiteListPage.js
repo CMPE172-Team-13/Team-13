@@ -106,9 +106,9 @@ const HospitalSiteListPage = props => {
                                         <button 
                                             onClick={() => {
                                                 if(selectedIndex == 0){
-                                                    history.push(`/?type=hospital&name=${row.name}&id=${row.id}`);
+                                                    history.push(`/analytics?type=hospital&name=${row.name}&id=${row.id}`);
                                                 } else {
-                                                    history.push(`/?type=site&name=${row.name}&id=${row.id}`);
+                                                    history.push(`/analytics?type=site&name=${row.name}&id=${row.id}`);
                                                 }
                                             }}>
                                             View Analytics
