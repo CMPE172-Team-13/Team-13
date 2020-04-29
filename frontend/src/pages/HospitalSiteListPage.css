@@ -34,7 +34,9 @@
 }
 
 .pagination-container {
-    margin-left: 40%;
+    margin: auto;
+    width: 50%; 
+    text-Align: center;
     margin-top: 10px;
 }
 

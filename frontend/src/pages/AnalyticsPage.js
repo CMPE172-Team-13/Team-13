@@ -147,52 +147,56 @@ const AnalyticsPage = props => {
         </div>
         <div style={{float:"left"}}>
             <div className="centered">
-                <h3>Current Blood Types in {name} </h3>
+                <h3>Current Month Blood Types </h3>
             </div>
             {data.every((item) => {return item.value === 0}) ? 
-                <div>
+                <div className="centered">
                     <h2>No Current Data Available</h2>
                 </div>
             :
-                <PieChart width={500} height={500}>
-                    <Pie
-                        data={data}
-                        cx={200}
-                        cy={200}
-                        labelLine={false}
-                        label={renderCustomizedLabel}
-                        outerRadius={200}
-                        fill="#8884d8"
-                        dataKey="value"
-                    >
-                    {
-                        data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
-                    }
-                    </Pie>
-                </PieChart>
+                <div id="pieChartContainer">
+                    <PieChart width={500} height={500}>
+                        <Pie
+                            data={data}
+                            cx={200}
+                            cy={200}
+                            labelLine={false}
+                            label={renderCustomizedLabel}
+                            outerRadius={200}
+                            fill="#8884d8"
+                            dataKey="value"
+                        >
+                        {
+                            data.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
+                        }
+                        </Pie>
+                    </PieChart>
+                </div>
             }
         </div>
         <div style={{float:"left"}}>
             <div className="centered">
                 <h3>Units of Blood Type A, Type B, Type AB, and Type O </h3>
             </div>
-            <BarChart width={730} height={500} data={barData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis 
-                    label={{
-                            value: 'Units', 
-                            angle: -90, 
-                            position: 'insideLeft' 
-                    }}
-                />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="Type A" fill="#0088FE" />
-                <Bar dataKey="Type B" fill="#00C49F" />
-                <Bar dataKey="Type AB" fill="#FFBB28" />
-                <Bar dataKey="Type O" fill="#FF8042" />
-            </BarChart>
+            <div>
+                <BarChart width={730} height={500} data={barData}>
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="name" />
+                    <YAxis 
+                        label={{
+                                value: 'Units', 
+                                angle: -90, 
+                                position: 'insideLeft' 
+                        }}
+                    />
+                    <Tooltip />
+                    <Legend />
+                    <Bar dataKey="Type A" fill="#0088FE" />
+                    <Bar dataKey="Type B" fill="#00C49F" />
+                    <Bar dataKey="Type AB" fill="#FFBB28" />
+                    <Bar dataKey="Type O" fill="#FF8042" />
+                </BarChart>
+            </div>
         </div>
         
     </div>
