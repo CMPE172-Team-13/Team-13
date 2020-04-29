@@ -37,10 +37,10 @@ const AnalyticsPage = props => {
                 const typeOResponseBody = await typeOResponse.json();
 
                 let data = [
-                    { name: 'Type A', value: typeAResponseBody.length },
-                    { name: 'Type B', value: typeBResponseBody.length },
-                    { name: 'Type AB',value: typeABResponseBody.length },
-                    { name: 'Type O', value: typeOResponseBody.length}
+                    { name: 'Type A', value: getDataByMonth(typeAResponseBody, currentDate.getMonth()+1).length},
+                    { name: 'Type B', value: getDataByMonth(typeBResponseBody, currentDate.getMonth()+1).length},
+                    { name: 'Type AB',value: getDataByMonth(typeABResponseBody, currentDate.getMonth()+1).length},
+                    { name: 'Type O', value: getDataByMonth(typeOResponseBody, currentDate.getMonth()+1).length}
                 ];
                 
                 let barData = [
