@@ -18,31 +18,7 @@ function App() {
   return (
     <Router>
       <div>
-        <nav>
-          <ul>
-          <li>
-              <Link to="/">Analytics</Link>
-            </li>
-            <li>
-              <Link to="/donations">Donations</Link>
-            </li>
-            <li>
-              <Link to="/hospitals">Hospitals</Link>
-            </li>
-            <li>
-              <Link to="/sites">Sites</Link>
-            </li>
-            <li>
-              <Link to="/addDonation">Add Donation</Link>
-            </li>
-            <li>
-              <Link to="/list">Hospital and Site Lists</Link>
-            </li>
-          </ul>
-        </nav>
-
         <HeaderMenu/>
-
         <Switch>
           <Route path="/hospitals">
             <Hospitals />
@@ -50,9 +26,9 @@ function App() {
           <Route path="/sites">
             <Sites />
           </Route>
-          <Route path="/addDonation">
-        	<AddDonationPage />
-	      </Route>
+          <Route path="/analytics">
+            <AnalyticsPage />
+	        </Route>
           <Route path="/donations">
             <Donations />
           </Route>
@@ -60,7 +36,7 @@ function App() {
             <HospitalSiteListPage/>
           </Route>
           <Route path="/">
-            <AnalyticsPage />
+            <AddDonationPage />
           </Route>
         </Switch>
       </div>

@@ -3,9 +3,12 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import MenuIcon from '@material-ui/icons/Menu';
+import { useHistory } from "react-router-dom";
 
 const HeaderMenu = () => {
   const [anchorEl, setAnchorEl] = useState(null);
+
+  let history = useHistory();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -27,8 +30,20 @@ const HeaderMenu = () => {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Donate</MenuItem>
-        <MenuItem onClick={handleClose}>Analytics</MenuItem>
+        <MenuItem 
+          onClick={() => {
+            handleClose();
+            history.push('/');
+          }}>
+            Donate
+        </MenuItem>
+        <MenuItem 
+          onClick={() => {
+            handleClose();
+            history.push('/list');
+          }}>
+            Analytics
+        </MenuItem>
       </Menu>
     </div>
   );
