@@ -8,7 +8,7 @@ This application is a three tier web application that simulates the blood donati
 
 ## Sample Demo Screeshots
 
-##  Setup Environment
+## Setup Environment
 
 ## Build Locally
 
