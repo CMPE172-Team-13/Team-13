@@ -3,3 +3,7 @@
     width: 50%; 
     text-Align: center;
 }
+
+#pieChartContainer {
+    margin-left: 10%;
+}
