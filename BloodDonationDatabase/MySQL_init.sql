@@ -1,3 +1,6 @@
+# MySQL commands for reference
+## Setting up your mysql database
+
 DROP DATABASE IF EXISTS BloodDonation;
 
 CREATE DATABASE BloodDonation;
