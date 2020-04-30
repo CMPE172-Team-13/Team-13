@@ -11,6 +11,17 @@ This application is a three tier web application that simulates the blood donati
 ## Setup Environment
 
 ## Build Locally
+The frontend is a React application and the backend is a Java Spring Boot application run using Maven. 
+
+Starting the client: <br>
+`cd` to frontend folder <br>
+`npm install` <br>
+`npm start` <br>
+Runs the app in the development mode.
+Open http://localhost:3000 to view it in the browser.
+
+Start the server:
+<br>`mvn clean install`<br>`mvn spring-boot:run` 
 
 ## Schema
 
