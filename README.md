@@ -11,6 +11,10 @@ This is the add donation page, which is where users can input a new donation.  T
 
 ![alt text](./assets/AddDonation.PNG)
 
+From the add donation page, when the "view donations" button is pressed, the list of current donations in the system will be displayed.
+
+![alt text](./assets/DonationList.PNG)
+
 ## Setup Environment
 
 ## Build Locally
