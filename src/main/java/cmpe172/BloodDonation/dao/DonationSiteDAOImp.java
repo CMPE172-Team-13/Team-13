@@ -90,4 +90,11 @@ public class DonationSiteDAOImp implements DonationSiteDAO{
 				.getResultList();
 		return d;
 	}
+	
+	public List<Object> getSiteWithMostDonation(){
+		Session currSession = entityManager.unwrap(Session.class);
+		List<Object> o = currSession.createNativeQuery("SELECT site.name, COUNT(donation.id) as donation_count FROM donation, site WHERE site_id = site.id GROUP BY site.id ORDER BY donation_count DESC LIMIT 1")
+				.getResultList();
+		return o;
+	}
 }

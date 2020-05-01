@@ -62,4 +62,9 @@ public class HospitalControler {
 	public List<Donation> getDonationByBloodType(@PathVariable int hospital_id, @PathVariable String blood_type) {
 		return hospitalService.getDonationByBloodType(hospital_id, blood_type);
 	}
+	
+	@GetMapping("/topHospital/{blood_type}")
+	public List<Object> getHospitalWithMostBloodType(@PathVariable String blood_type){
+		return hospitalService.getHospitalWithMostBloodType(blood_type);
+	}
 }
