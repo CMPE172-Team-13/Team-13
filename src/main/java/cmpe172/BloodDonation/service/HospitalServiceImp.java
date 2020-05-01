@@ -50,4 +50,9 @@ public class HospitalServiceImp implements HospitalService{
 	public List<Donation> getDonationByBloodType(int hospital_id, String blood_type){
 		return hospitalDao.getDonationByBloodType(hospital_id, blood_type);
 	}
+	
+	@Transactional
+	public List<Object> getHospitalWithMostBloodType(String blood_type){
+		return hospitalDao.getHospitalWithMostBloodType(blood_type);
+	}
 }

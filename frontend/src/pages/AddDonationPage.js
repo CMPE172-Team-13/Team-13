@@ -51,6 +51,9 @@ const AddDonationPage = props => {
 	
 	const [donationSites, setDonationSites] = React.useState([]);
 	const [hospitals, setHospitals] = React.useState([]);
+
+	const [submitted, setSubmitted] = React.useState(false);
+
 	let isLoading = true;
 	
 	// Used for debugging
@@ -71,6 +74,7 @@ const AddDonationPage = props => {
 		var donation_number = makeid(10);
 		const toInput = { site_id, hospital_id, blood_type, donation_number, aDate: todaysDate };
 		postDonation(toInput);
+		setSubmitted(true);
 	};
 	
 	async function postDonation(toInput) {
@@ -146,7 +150,13 @@ const AddDonationPage = props => {
 					Record Blood Donation
 				</Typography>
 				
-				{isLoading ? ( <CircularProgress /> ) : (
+				{isLoading ? ( <CircularProgress /> ) 
+				: submitted ? (
+					<div style={{textAlign:"center"}}>
+						<h2>Thank you for donating!</h2>
+						<p>To learn more about donating blood, go <a href="https://www.redcross.org/give-blood.html">here</a>.</p>
+					</div>) 
+				: (
 				
 					<form className={classes.form} noValidate>
 						<Grid container spacing={2}>

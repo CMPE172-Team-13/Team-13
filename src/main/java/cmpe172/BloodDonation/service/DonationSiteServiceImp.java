@@ -55,4 +55,9 @@ public class DonationSiteServiceImp implements DonationSiteService{
 	public List<Donation> getDonationByBloodType(int site_id, String blood_type) {
 		return donationSiteDao.getDonationByBloodType(site_id, blood_type);
 	}
+	
+	@Transactional
+	public List<Object> getSiteWithMostDonation(){
+		return donationSiteDao.getSiteWithMostDonation();
+	}
 }
