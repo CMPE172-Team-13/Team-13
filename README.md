@@ -8,7 +8,7 @@ This application is a three tier web application that simulates the blood donati
 
 ## Sample Demo Screeshots
 This is the add donation page, which is where users can input a new donation.  They first choose a donation site, which narrows down the hospital options to those that are near the donation site.  Then the blood type is chosen before submission into the system.
-![alt text](./assets/AddDonation.png)
+![alt text](./assets/AddDonation.PNG)
 
 ## Setup Environment
 
