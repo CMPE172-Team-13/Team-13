@@ -151,23 +151,24 @@ const AddDonationPage = props => {
 					<form className={classes.form} noValidate>
 						<Grid container spacing={2}>
 							<Grid item xs={12}>
-								<Select
-									variant="outlined"
-									required
-									fullWidth
-									id="siteId"
-									value={site_id}
-									label="Donation Site"
-									name="name"
-									autoComplete="Site ID"
-									onChange={handleSiteChange}
-								>
-									{donationSites?.map(donationSite => (
-										<MenuItem value={donationSite.id}>
-											{donationSite.name}
-										</MenuItem>
-									))}
-								</Select>
+								<InputLabel htmlFor="hospital-label">Donation Site</InputLabel>
+									<Select
+										variant="outlined"
+										required
+										fullWidth
+										id="siteId"
+										value={site_id}
+										label="Donation Site"
+										name="name"
+										autoComplete="Site ID"
+										onChange={handleSiteChange}
+									>
+										{donationSites?.map(donationSite => (
+											<MenuItem value={donationSite.id}>
+												{donationSite.name}
+											</MenuItem>
+										))}
+									</Select>
 							</Grid>
 							<Grid item xs={12}>
 								<InputLabel htmlFor="hospital-label">Hospital</InputLabel>
