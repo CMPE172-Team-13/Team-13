@@ -15,6 +15,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
+
 const useStyles = makeStyles(theme => ({
   paper: {
     marginTop: theme.spacing(7),
@@ -151,7 +152,7 @@ const AddDonationPage = props => {
 					<form className={classes.form} noValidate>
 						<Grid container spacing={2}>
 							<Grid item xs={12}>
-								<InputLabel htmlFor="hospital-label">Hospital</InputLabel>
+								<InputLabel htmlFor="hospital-label">Donation Site</InputLabel>
 									<Select
 										variant="outlined"
 										required
@@ -223,14 +224,21 @@ const AddDonationPage = props => {
 						</Button>
 						<Grid container justify="center">
 							<Grid item>
-								<Link to="/donations">View Donations</Link>
+								<Link to="/donations">
+									<Button 
+									variant="contained"
+									color="primary"
+									>
+									View Donations
+									</Button>
+								</Link>
 							</Grid>
 						</Grid>
 					</form>
 				)}
 					
 				<Typography style={{ margin: 7 }} variant="body1">
-					Debug: {message}
+					
 				</Typography>
 			</div>
 		</Container>
