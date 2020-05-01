@@ -151,7 +151,7 @@ const AddDonationPage = props => {
 					<form className={classes.form} noValidate>
 						<Grid container spacing={2}>
 							<Grid item xs={12}>
-								<InputLabel htmlFor="hospital-label">Donation Site</InputLabel>
+								<InputLabel htmlFor="hospital-label">Hospital</InputLabel>
 									<Select
 										variant="outlined"
 										required
