@@ -49,7 +49,7 @@ Start the server:
 ![alt text](./assets/BloodDonationERD.png)
 
 ## Database Queries
-There are three database access object (DAO) classes containing queries for the donation, donation site and hospital data.  Each class has similar sets of queries and below are the ones belonging to the donation site table.
+There are three database access object (DAO) classes containing queries for the donation, donation site and hospital data.  Each class has similar sets of queries and below are the ones belonging to the donation site table (DonationSiteDAOImp.java).
 - **To get the entire list of donation sites:**
 
 ![alt text](./assets/DatabaseQueries/GetDonationList.PNG)
