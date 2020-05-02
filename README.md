@@ -15,6 +15,20 @@ From the add donation page, when the "view donations" button is pressed, the lis
 
 ![alt text](./assets/DonationList.PNG)
 
+There is also a page that displays the list of hospitals and donation sites, along with the overall analytics for the site with the greatest number of donations and the hospital with the greatest amounts of a particular blood type.
+
+![alt text](./assets/HospitalDonationAnalytics.PNG)
+
+From that same page, there are buttons to view data specific to each hospital and donation site.
+On each specific page of either a donation site or hospital, when a user scrolls above the month region, more information on which blood type was donated will be shown.
+Below is an example of data for a hospital.
+
+![alt text](./assets/HosAnalytics.png)
+
+Here is an example of data for a donation site.
+
+![alt text](./assets/SiteAnalytics.PNG)
+
 ## Setup Environment
 
 ## Build Locally
