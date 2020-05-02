@@ -19,6 +19,7 @@ const AnalyticsPage = props => {
 
     const [data, setData] = useState(null);
     const [barData, setBarData] = useState(null);
+    const [hospitalCapacity, setHospitalCapacity] = useState(null);
 
     const fetchCurrentBloodTypeData = useCallback(async() => {
         var currentDate = new Date();
@@ -55,6 +56,11 @@ const AnalyticsPage = props => {
                     "Type O": getDataByMonth(typeOResponseBody, currentDate.getMonth()+1).length}
                 ];
 
+                const hospitalCapacityResponse = await fetch(`/api/hospital/${id}`);
+                const hospitalCapacityResponseBody = await hospitalCapacityResponse.json();
+                
+                console.log(hospitalCapacityResponseBody);
+                setHospitalCapacity(hospitalCapacityResponseBody.capacity);
                 setData(data);
                 setBarData(barData);
                 
@@ -172,6 +178,11 @@ const AnalyticsPage = props => {
                         </Pie>
                     </PieChart>
                 </div>
+            }
+            {type === "hospital" ?
+                <div id="capacityContainer" className="centered">
+                    <h3>Total Capacity: {hospitalCapacity}</h3>
+                </div> :""
             }
         </div>
         <div style={{float:"left"}}>

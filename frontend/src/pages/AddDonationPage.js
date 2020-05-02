@@ -15,6 +15,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
+
 const useStyles = makeStyles(theme => ({
   paper: {
     marginTop: theme.spacing(7),
@@ -51,6 +52,9 @@ const AddDonationPage = props => {
 	
 	const [donationSites, setDonationSites] = React.useState([]);
 	const [hospitals, setHospitals] = React.useState([]);
+
+	const [submitted, setSubmitted] = React.useState(false);
+
 	let isLoading = true;
 	
 	// Used for debugging
@@ -71,6 +75,7 @@ const AddDonationPage = props => {
 		var donation_number = makeid(10);
 		const toInput = { site_id, hospital_id, blood_type, donation_number, aDate: todaysDate };
 		postDonation(toInput);
+		setSubmitted(true);
 	};
 	
 	async function postDonation(toInput) {
@@ -146,28 +151,35 @@ const AddDonationPage = props => {
 					Record Blood Donation
 				</Typography>
 				
-				{isLoading ? ( <CircularProgress /> ) : (
+				{isLoading ? ( <CircularProgress /> ) 
+				: submitted ? (
+					<div style={{textAlign:"center"}}>
+						<h2>Thank you for donating!</h2>
+						<p>To learn more about donating blood, go <a href="https://www.redcross.org/give-blood.html">here</a>.</p>
+					</div>) 
+				: (
 				
 					<form className={classes.form} noValidate>
 						<Grid container spacing={2}>
 							<Grid item xs={12}>
-								<Select
-									variant="outlined"
-									required
-									fullWidth
-									id="siteId"
-									value={site_id}
-									label="Donation Site"
-									name="name"
-									autoComplete="Site ID"
-									onChange={handleSiteChange}
-								>
-									{donationSites?.map(donationSite => (
-										<MenuItem value={donationSite.id}>
-											{donationSite.name}
-										</MenuItem>
-									))}
-								</Select>
+								<InputLabel htmlFor="hospital-label">Donation Site</InputLabel>
+									<Select
+										variant="outlined"
+										required
+										fullWidth
+										id="siteId"
+										value={site_id}
+										label="Donation Site"
+										name="name"
+										autoComplete="Site ID"
+										onChange={handleSiteChange}
+									>
+										{donationSites?.map(donationSite => (
+											<MenuItem value={donationSite.id}>
+												{donationSite.name}
+											</MenuItem>
+										))}
+									</Select>
 							</Grid>
 							<Grid item xs={12}>
 								<InputLabel htmlFor="hospital-label">Hospital</InputLabel>
@@ -222,14 +234,21 @@ const AddDonationPage = props => {
 						</Button>
 						<Grid container justify="center">
 							<Grid item>
-								<Link to="/donations">View Donations</Link>
+								<Link to="/donations">
+									<Button 
+									variant="contained"
+									color="primary"
+									>
+									View Donations
+									</Button>
+								</Link>
 							</Grid>
 						</Grid>
 					</form>
 				)}
 					
 				<Typography style={{ margin: 7 }} variant="body1">
-					Debug: {message}
+					
 				</Typography>
 			</div>
 		</Container>

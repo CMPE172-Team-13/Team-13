@@ -5,6 +5,7 @@ import {CircularProgress} from '@material-ui/core';
 
 import { paginate, getNumberOfPages } from '../utils/paginate';
 import './HospitalSiteListPage.css';
+import Card from './../components/Card';
 
 const HospitalSiteListPage = props => {
     let history = useHistory();
@@ -16,6 +17,11 @@ const HospitalSiteListPage = props => {
     const [page, setPage] = useState(1);
     const labels = ["name", "location"];
     const [pagedData, setPagedData] = useState(null);
+    const[hospitalWithMostTypeA, setHospitalWithMostTypeA] = useState(null);
+    const[hospitalWithMostTypeB, setHospitalWithMostTypeB] = useState(null);
+    const[hospitalWithMostTypeAB, setHospitalWithMostTypeAB] = useState(null);
+    const[hospitalWithMostTypeO, setHospitalWithMostTypeO] = useState(null);
+    const[siteWithMostDonations, setSiteWithMostDonations] = useState(null);
 
     var pageSize = 5;
 
@@ -36,6 +42,20 @@ const HospitalSiteListPage = props => {
                 setPagedData(paginate(convertedHospitalData,1,pageSize));
             }
 
+            const getHospitalTypeAResponse = await fetch("/api/topHospital/A");
+            const getHospitalTypeABody = await getHospitalTypeAResponse.json();
+            const getHospitalTypeBResponse = await fetch("/api/topHospital/B");
+            const getHospitalTypeBBody = await getHospitalTypeBResponse.json();
+            const getHospitalTypeABResponse = await fetch("/api/topHospital/AB");
+            const getHospitalTypeABBody = await getHospitalTypeABResponse.json();
+            const getHospitalTypeOResponse = await fetch("/api/topHospital/O");
+            const getHospitalTypeOBody = await getHospitalTypeOResponse.json();
+
+            setHospitalWithMostTypeA(getHospitalTypeABody);
+            setHospitalWithMostTypeB(getHospitalTypeBBody);
+            setHospitalWithMostTypeAB(getHospitalTypeABBody);
+            setHospitalWithMostTypeO(getHospitalTypeOBody);
+
             const siteDataResponse = await fetch("/api/site");
             const siteResponsebody = await siteDataResponse.json();
             if(Array.isArray(siteResponsebody)){
@@ -44,6 +64,10 @@ const HospitalSiteListPage = props => {
                 });
                 setSiteData(convertedSiteData);   
             }
+
+            const getSiteWithMostDonationsResponse = await fetch("/api/siteWithMostDonations");
+            const getSiteWithMostDonationsBody = await getSiteWithMostDonationsResponse.json();
+            setSiteWithMostDonations(getSiteWithMostDonationsBody);
         } catch {
             console.log("The fetch calls failed");
         }
@@ -68,7 +92,10 @@ const HospitalSiteListPage = props => {
         setPage(page);
     };
 
-    if(!pagedData){
+    if(!pagedData || !hospitalWithMostTypeA || !hospitalWithMostTypeB 
+        || !hospitalWithMostTypeAB || !hospitalWithMostTypeO 
+        || !siteWithMostDonations)
+    {
         return( 
         <div className="centered">
             <CircularProgress/>
@@ -78,15 +105,46 @@ const HospitalSiteListPage = props => {
 
     return (
         <div>
-            <div className="tab-container">
-               <div className={selectedIndex === 0 ? "tab tab-active" : "tab tab-inactive"} id="first-tab" onClick={() => handleChange(0)}>
-                    <p>Hospitals</p>
-               </div>
-               <div className={selectedIndex === 0 ? "tab tab-inactive" : "tab tab-active"} onClick={() => handleChange(1)}>
-                    <p>Donation Sites</p>
-               </div>
+            <div className="card-container">
+                <h2 style={{backgroundColor:"lightblue"}}>Hospitals that received the most of a particular blood type to date:</h2>
+                <div>
+                    <Card 
+                        topText={hospitalWithMostTypeA[0][0]} 
+                        middleText="Type A"
+                        bottomText={hospitalWithMostTypeA[0][1] + " Units"}
+                    />
+                    <Card 
+                        topText={hospitalWithMostTypeB[0][0]} 
+                        middleText="Type B"
+                        bottomText={hospitalWithMostTypeB[0][1] + " Units"}
+                    />
+                    <Card 
+                        topText={hospitalWithMostTypeAB[0][0]} 
+                        middleText="Type AB"
+                        bottomText={hospitalWithMostTypeAB[0][1] + " Units"}
+                    />
+                    <Card 
+                        topText={hospitalWithMostTypeO[0][0]} 
+                        middleText="Type O"
+                        bottomText={hospitalWithMostTypeO[0][1] + " Units"}
+                    />
+                </div>
+                <div className="site-container">
+                    <h2>Donation site with the most donations to date:</h2>
+                    <h3>{siteWithMostDonations[0][0]}</h3>
+                    <h3>{siteWithMostDonations[0][1]} Donations</h3>
+                </div>
             </div>
-            <div className="centered">
+
+            <div className="table-container">
+                <div className="tab-container">
+                    <div className={selectedIndex === 0 ? "tab tab-active" : "tab tab-inactive"} id="first-tab" onClick={() => handleChange(0)}>
+                            <p>Hospitals</p>
+                    </div>
+                    <div className={selectedIndex === 0 ? "tab tab-inactive" : "tab tab-active"} onClick={() => handleChange(1)}>
+                            <p>Donation Sites</p>
+                    </div>
+                </div>
                 <table style={{width:"100%", border: "1px solid black"}}>
                     <thead>
                             <tr>
@@ -118,8 +176,7 @@ const HospitalSiteListPage = props => {
                             ))}
                     </tbody>
                 </table>
-            </div>
-            <div className="centered">
+
                 <div className="pagination-container">
                     <Pagination 
                         count={getNumberOfPages(data,pageSize)} 

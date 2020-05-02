@@ -75,4 +75,11 @@ public class HospitalDAOImp implements HospitalDAO{
 				.getResultList();
 		return d;
 	}
+	
+	public List<Object> getHospitalWithMostBloodType(String blood_type){
+		Session currSession = entityManager.unwrap(Session.class);
+		List<Object> o = currSession.createNativeQuery("SELECT hospital.name, COUNT(blood_type) as blood_type_count FROM donation, hospital WHERE hospital_id = hospital.id AND blood_type = :blood_type GROUP BY hospital.id ORDER BY blood_type_count DESC LIMIT 1")
+				.setParameter("blood_type", blood_type).getResultList();
+		return o;
+	}
 }

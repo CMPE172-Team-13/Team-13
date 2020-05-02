@@ -67,4 +67,9 @@ public class DonationSiteController {
 	public List<Donation> getDonationByBloodType(@PathVariable int site_id, @PathVariable String blood_type) {
 		return donationSiteService.getDonationByBloodType(site_id, blood_type);
 	}
+	
+	@GetMapping("/siteWithMostDonations")
+	public List<Object> getSiteWithMostDonation(){
+		return donationSiteService.getSiteWithMostDonation();
+	}
 }
