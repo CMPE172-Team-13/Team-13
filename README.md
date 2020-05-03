@@ -30,6 +30,24 @@ Here is an example of data for a donation site.
 ![alt text](./assets/SiteAnalytics.PNG)
 
 ## Setup Environment
+In order to run the project locally, you must have the following software installed: <br>
+* Node.Js version 10.13 or later. If you don't have it, download [here](https://nodejs.org/en/).
+* Java 8 JDK. If you don't have it, download [here](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html).
+* A SQL Client. We recommend MySQL and MySQL Workbench. If you don't have it, download [here](https://dev.mysql.com/downloads/). 
+* Git. If you don't have it, download [here](https://git-scm.com/downloads).
+
+To set up the environment:
+1. Clone this repository.
+2. Open your sql client and copy the commands from the MySQL_init.sql file to initialize the database.The file can be found in the BloodDonationDatabase directory. 
+3. Open the project in your editor of choice. In the application.properties file, enter your database credentials.This file can be found under /src/main/resources. Your file may look like this:
+`spring.datasource.url=jdbc:mysql://localhost:3306/BloodDonation` <br>
+`spring.datasource.username=root` <br>
+`spring.datasource.password=root`
+4. Run the project as a maven build. Once that is complete, you are ready to build the project locally.
+
+Make note: After running the last step, if the server runs on a different port than localhost:8080 than change the line
+`"proxy": "http://localhost:8080"` <br>
+in the package.json file, under the frontend file, to your server's port number.
 
 ## Build Locally
 The frontend is a React application and the backend is a Java Spring Boot application run using Maven. 
