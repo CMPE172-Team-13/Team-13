@@ -30,23 +30,6 @@ public class DonationSiteServiceImp implements DonationSiteService{
 	}
 
 	@Transactional
-	@Override
-	public void save(DonationSite donationSite) {
-		donationSiteDao.save(donationSite);
-	}
-
-	@Transactional
-	@Override
-	public void delete(int site_id) {
-		donationSiteDao.delete(site_id);
-	}
-
-	@Transactional
-	public List<Donation> getDonationsBySiteId(int site_id) {
-		return donationSiteDao.getDonationsBySiteId(site_id);
-	}
-
-	@Transactional
 	public List<Hospital> getHospitalsBySiteId(int site_id) {
 		return donationSiteDao.getHospitalsBySiteId(site_id);
 	}	

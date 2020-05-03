@@ -13,7 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity      
@@ -30,10 +29,6 @@ public class DonationSite {
 
 	@Column 
 	private String location;	
-	
-//	//This is from the foreign key mapping in Donation
-//	@OneToMany(mappedBy = "site", cascade = CascadeType.ALL)
-//	private List<Donation> donations;
 		
 	//here is the many-to-many mapping representing the site_hospital relationship
 	@ManyToMany(cascade = CascadeType.ALL)//, orphanRemoval = true)

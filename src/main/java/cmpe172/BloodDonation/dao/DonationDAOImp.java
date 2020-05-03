@@ -39,7 +39,8 @@ public class DonationDAOImp implements DonationDAO{
 
 	@Override
 	public Donation getLast() {
-		TypedQuery<Donation> typedQuery= entityManager.createQuery("SELECT d FROM Donation d ORDER BY d.id DESC", Donation.class);
+		TypedQuery<Donation> typedQuery= entityManager.createQuery("SELECT d FROM Donation d "
+				+ "ORDER BY d.id DESC", Donation.class);
 		List<Donation> donations = typedQuery.getResultList();
 		return donations.get(0);
 	}
@@ -53,10 +54,4 @@ public class DonationDAOImp implements DonationDAO{
 		currSession.save(donationInfo);
 	}
 
-	@Override
-	public void delete(int donation_id) {
-		Session currSession = entityManager.unwrap(Session.class);
-		Donation dono = currSession.get(Donation.class, donation_id);
-		currSession.delete(dono);
-	}
 }

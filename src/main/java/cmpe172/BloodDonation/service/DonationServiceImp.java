@@ -40,9 +40,4 @@ public class DonationServiceImp implements DonationService{
 		donationDao.save(donation, donationInfo);
 	}
 
-	@Transactional
-	@Override
-	public void delete(int donation_id) {
-		donationDao.delete(donation_id);
-	}
 }
