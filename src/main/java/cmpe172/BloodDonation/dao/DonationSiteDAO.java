@@ -12,12 +12,6 @@ public interface DonationSiteDAO {
 	
 	DonationSite get(int site_id);
 	
-	void save(DonationSite donationSite);
-	
-	void delete(int site_id);
-	
-	public List<Donation> getDonationsBySiteId(int site_id);
-	
 	public List<Hospital> getHospitalsBySiteId(int site_id);
 	
 	public List<Donation> getDonationByBloodType(int site_id, String blood_type);

@@ -34,33 +34,6 @@ public class DonationSiteDAOImp implements DonationSiteDAO{
 		return donoSite;
 	}
 
-	@Override
-	public void save(DonationSite donationSite) {
-		Session currSession = entityManager.unwrap(Session.class);
-		currSession.saveOrUpdate(donationSite);		
-	}
-
-	@Override
-	public void delete(int site_id) {
-		Session currSession = entityManager.unwrap(Session.class);
-		DonationSite donoSite = currSession.get(DonationSite.class, site_id);
-		currSession.delete(donoSite);
-	}
-
-	/**
-	 * This returns the donations that have came out of this site with id site_id
-	 * @param site_id the is of the site
-	 * @return a list of donations that have came out of the site
-	 */
-	public List<Donation> getDonationsBySiteId(int site_id) {
-		Session currSession = entityManager.unwrap(Session.class);
-		List<Donation> d = currSession.createNativeQuery(
-				"SELECT * FROM donation WHERE id IN (SELECT donation_id FROM donation_site WHERE site_id = :site_id)", Donation.class)
-				.setParameter("site_id", site_id)
-				.getResultList();
-		return d;		
-	}
-
 	/**
 	 * This returns the hospitals that this site with id site_id delivers to
 	 * @param site_id the id of the site
@@ -69,7 +42,8 @@ public class DonationSiteDAOImp implements DonationSiteDAO{
 	public List<Hospital> getHospitalsBySiteId(int site_id) {
 		Session currSession = entityManager.unwrap(Session.class);
 		List<Hospital> h = currSession.createNativeQuery(
-				"SELECT * FROM hospital WHERE id IN (SELECT hospital_id FROM site_hospital WHERE site_id = :site_id)", Hospital.class)
+				"SELECT * FROM hospital WHERE id IN (SELECT hospital_id FROM site_hospital "
+				+ "WHERE site_id = :site_id)", Hospital.class)
 				.setParameter("site_id", site_id)
 				.getResultList();
 		return h;		
@@ -84,16 +58,20 @@ public class DonationSiteDAOImp implements DonationSiteDAO{
 	public List<Donation> getDonationByBloodType(int site_id, String blood_type) {
 		Session currSession = entityManager.unwrap(Session.class);
 		List<Donation> d = currSession.createNativeQuery(
-				"SELECT * FROM donation WHERE id IN (SELECT donation_id FROM donation_site WHERE site_id = :site_id) AND blood_type = :blood_type", Donation.class)
+				"SELECT * FROM donation WHERE id IN (SELECT donation_id FROM donation_site "
+				+ "WHERE site_id = :site_id) AND blood_type = :blood_type", Donation.class)
 				.setParameter("blood_type", blood_type)
 				.setParameter("site_id", site_id)				
 				.getResultList();
 		return d;
 	}
 	
+	@SuppressWarnings("unchecked")		
 	public List<Object> getSiteWithMostDonation(){
 		Session currSession = entityManager.unwrap(Session.class);
-		List<Object> o = currSession.createNativeQuery("SELECT site.name, COUNT(donation.id) as donation_count FROM donation, site WHERE site_id = site.id GROUP BY site.id ORDER BY donation_count DESC LIMIT 1")
+		List<Object> o = currSession.createNativeQuery("SELECT site.name, COUNT(donation.id) as "
+				+ "donation_count FROM donation, site WHERE site_id = site.id GROUP BY site.id "
+				+ "ORDER BY donation_count DESC LIMIT 1")
 				.getResultList();
 		return o;
 	}
