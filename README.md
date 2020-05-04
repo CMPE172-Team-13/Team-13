@@ -98,6 +98,70 @@ There are three database access object (DAO) classes containing queries for the 
 ![alt text](./assets/DatabaseQueries/GetMostDonations.PNG)
 
 ## Mid tier APIs
+The APIS are disributed across three classes: DonationController, DonationSiteController, and HospitalController. <br><br>
+
+Inside of DonationController:
+- Class declaration for DonationController:
+
+![alt text](./assets/APIs/DonationController.PNG)
+
+- Get all of the donations in the database as a list:
+
+![alt text](./assets/APIs/GetDonationList.PNG)
+
+- Get a particular donation from the database using the donation_id:
+
+![alt text](./assets/APIs/GetDonationById.PNG)
+
+- Insert a donation into the database:
+
+![alt text](./assets/APIs/PostDonation.PNG)
+
+Inside of DonationSiteController:
+- Class declaration for DonationSiteController:
+
+![alt text](./assets/APIs/DonationSiteController.PNG)
+
+- Get all of the sites in the database as a list:
+
+![alt text](./assets/APIs/GetDonationSiteList.PNG)
+
+- Get a particular site from the database using the site_id:
+
+![alt text](./assets/APIs/GetDonationSiteById.PNG)
+
+- Get the hospitals that a particular site delivers blood to using site_id
+
+![alt text](./assets/APIs/GetHospitalsBySiteId.PNG)
+
+- Get donations of a certain blood type present at a particular site:
+
+![alt text](./assets/APIs/GetDonationByBloodTypeDonationSite.PNG)
+
+- Get the site in which most blood donations occur:
+
+![alt text](./assets/APIs/GetSiteWithMostDonations.PNG)
+
+Inside of HospitalController:
+- Class declaration for HospitalController:
+
+![alt text](./assets/APIs/HospitalController.PNG)
+
+- Get all of the hospitals in the database as a list:
+
+![alt text](./assets/APIs/GetHospitalList.PNG)
+
+- Get a particular hospital from the database using the hospital_id:
+
+![alt text](./assets/APIs/GetHospitalById.PNG)
+
+- Get donations of a certain blood type present at a particular hospital:
+
+![alt text](./assets/APIs/GetDonationByBloodTypeHospital.PNG)
+
+- Get the hospital that has the most of a particular blood type:
+
+![alt text](./assets/APIs/GetHospitalWithMostDonations.PNG)
 
 ## UI Data Transport
 JSON is used as the data transport format between the server and client. 
