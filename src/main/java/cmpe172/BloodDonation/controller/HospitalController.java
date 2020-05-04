@@ -15,7 +15,7 @@ import cmpe172.BloodDonation.model.Hospital;
 
 @RestController
 @RequestMapping("/api")
-public class HospitalControler {
+public class HospitalController {
 
 	@Autowired
 	private HospitalService hospitalService;
