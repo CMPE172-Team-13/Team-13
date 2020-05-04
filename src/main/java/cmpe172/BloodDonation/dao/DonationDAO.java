@@ -15,5 +15,4 @@ public interface DonationDAO {
 	
 	void save(Donation donation, DonationToSite donationInfo);
 	
-	void delete(int donation_id);
 	}

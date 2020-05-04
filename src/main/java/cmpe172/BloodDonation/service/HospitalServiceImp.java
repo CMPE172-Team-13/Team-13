@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cmpe172.BloodDonation.dao.HospitalDAO;
 import cmpe172.BloodDonation.model.Donation;
-import cmpe172.BloodDonation.model.DonationSite;
 import cmpe172.BloodDonation.model.Hospital;
 
 @Service
@@ -27,23 +26,6 @@ public class HospitalServiceImp implements HospitalService{
 	@Override
 	public Hospital get(int hospital_id) {
 		return hospitalDao.get(hospital_id);
-	}
-
-	@Transactional
-	@Override
-	public void save(Hospital hospital) {
-		hospitalDao.save(hospital);
-	}
-
-	@Transactional
-	@Override
-	public void delete(int hospital_id) {
-		hospitalDao.delete(hospital_id);
-	}
-
-	@Transactional
-	public DonationSite getDonationSiteByHospitalId(int hospital_id) {
-		return hospitalDao.getDonationSiteByHospitalId(hospital_id);
 	}
 
 	@Transactional

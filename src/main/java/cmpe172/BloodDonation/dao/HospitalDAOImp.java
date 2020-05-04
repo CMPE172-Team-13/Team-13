@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import cmpe172.BloodDonation.model.Donation;
-import cmpe172.BloodDonation.model.DonationSite;
 import cmpe172.BloodDonation.model.Hospital;
 
 @Repository
@@ -33,32 +32,6 @@ public class HospitalDAOImp implements HospitalDAO{
 		Hospital hospital = currSession.get(Hospital.class, hospital_id);
 		return hospital;
 	}
-
-	@Override
-	public void save(Hospital hospital) {
-		Session currSession = entityManager.unwrap(Session.class);
-		currSession.saveOrUpdate(hospital);	
-	}
-
-	@Override
-	public void delete(int hospital_id) {
-		Session currSession = entityManager.unwrap(Session.class);
-		Hospital hospital = currSession.get(Hospital.class, hospital_id);
-		currSession.delete(hospital);
-	}
-	
-	/**
-	 * This returns the donation site that delivers blood donations to the hospital
-	 * @param hospital_id the is of the hospital
-	 * @return the site that the hospital receives blood from
-	 */
-	public DonationSite getDonationSiteByHospitalId(int hospital_id) {
-		Session currSession = entityManager.unwrap(Session.class);
-		DonationSite d = currSession.createNativeQuery(
-				"SELECT * FROM site WHERE id IN (SELECT site_id FROM site_hospital WHERE hospital_id= :hospital_id)", DonationSite.class)
-				.setParameter("hospital_id", hospital_id).getSingleResult();
-		return d;
-	}
 	
 	/**
 	 * This returns the donations of blood type blood_type from hospital with id given by hospital_id
@@ -76,9 +49,12 @@ public class HospitalDAOImp implements HospitalDAO{
 		return d;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Object> getHospitalWithMostBloodType(String blood_type){
 		Session currSession = entityManager.unwrap(Session.class);
-		List<Object> o = currSession.createNativeQuery("SELECT hospital.name, COUNT(blood_type) as blood_type_count FROM donation, hospital WHERE hospital_id = hospital.id AND blood_type = :blood_type GROUP BY hospital.id ORDER BY blood_type_count DESC LIMIT 1")
+		List<Object> o = currSession.createNativeQuery("SELECT hospital.name, COUNT(blood_type) as blood_type_count "
+				+ "FROM donation, hospital WHERE hospital_id = hospital.id AND blood_type = :blood_type GROUP BY hospital.id "
+				+ "ORDER BY blood_type_count DESC LIMIT 1")
 				.setParameter("blood_type", blood_type).getResultList();
 		return o;
 	}
