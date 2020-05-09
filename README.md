@@ -78,7 +78,7 @@ For our application, we only used one POST request to save the donation and the 
 
 There are three database access object (DAO) classes containing queries for the donation, donation site and hospital data.  We used a mix of queries pertaining to the EntityManager interface and custom queries.
 <br>
-Here are the queries inside of DonationDAOImp.java:
+#### Here are the queries inside of DonationDAOImp.java:
 
 - To get the entire list of donations:
 
@@ -92,7 +92,8 @@ Here are the queries inside of DonationDAOImp.java:
 
 ![alt text](./assets/DatabaseQueries/DonationSave.PNG)
 
-Here are the queries inside of DonationSiteDAOImp.java:
+#### Here are the queries inside of DonationSiteDAOImp.java:
+
 - To get the entire list of donation sites:
 
 ![alt text](./assets/DatabaseQueries/GetDonationList.PNG)
@@ -113,7 +114,7 @@ Here are the queries inside of DonationSiteDAOImp.java:
 
 ![alt text](./assets/DatabaseQueries/GetMostDonations.PNG)
 
-Here are the queries inside of HospitalDAOImp.java:
+#### Here are the queries inside of HospitalDAOImp.java:
 
 - To get the entire list of hospitals:
 
@@ -134,7 +135,7 @@ Here are the queries inside of HospitalDAOImp.java:
 ## Mid tier APIs
 The APIS are disributed across three classes: DonationController, DonationSiteController, and HospitalController. <br><br>
 
-Inside of DonationController:
+#### Inside of DonationController:
 - Class declaration for DonationController:
 
 ![alt text](./assets/APIs/DonationController.PNG)
@@ -151,7 +152,8 @@ Inside of DonationController:
 
 ![alt text](./assets/APIs/PostDonation.PNG)
 
-Inside of DonationSiteController:
+#### Inside of DonationSiteController:
+
 - Class declaration for DonationSiteController:
 
 ![alt text](./assets/APIs/DonationSiteController.PNG)
@@ -176,7 +178,8 @@ Inside of DonationSiteController:
 
 ![alt text](./assets/APIs/GetSiteWithMostDonations.PNG)
 
-Inside of HospitalController:
+#### Inside of HospitalController:
+
 - Class declaration for HospitalController:
 
 ![alt text](./assets/APIs/HospitalController.PNG)
