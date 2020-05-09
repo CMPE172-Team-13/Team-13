@@ -68,7 +68,23 @@ Start the server:
 
 ## Database Queries
 
-There are three database access object (DAO) classes containing queries for the donation, donation site and hospital data.  Each class has similar sets of queries and below are the ones belonging to the donation site table (DonationSiteDAOImp.java).
+There are three database access object (DAO) classes containing queries for the donation, donation site and hospital data.  We used a mix of queries pertaining to the EntityManager interface and custom queries.
+<br>
+Here are the queries inside of DonationDAOImp.java:
+
+- To get the entire list of donations:
+
+![alt text](./assets/DatabaseQueries/Donation - GetList.PNG)
+
+- To get a particular donation:
+
+![alt text](./assets/DatabaseQueries/Donation - GetById.PNG)
+
+- To save donation:
+
+![alt text](./assets/DatabaseQueries/Donation - Save.PNG)
+
+Here are the queries inside of DonationSiteDAOImp.java:
 - To get the entire list of donation sites:
 
 ![alt text](./assets/DatabaseQueries/GetDonationList.PNG)
@@ -77,25 +93,35 @@ There are three database access object (DAO) classes containing queries for the 
 
 ![alt text](./assets/DatabaseQueries/GetDonationSite.PNG)
 
-- To post a donation site:
-
-![alt text](./assets/DatabaseQueries/PostDonationSite.PNG)
-
-- To delete a donation site:
-
-![alt text](./assets/DatabaseQueries/DeleteDonationSite.PNG)
-
 - To get the list of nearby hospitals around a particular donation site:
 
 ![alt text](./assets/DatabaseQueries/GetHospitalsBySiteID.PNG)
 
 - To get the list of donations of a particular blood type at a particular donation site:
 
-![alt text](./assets/DatabaseQueries/GetDonationList.PNG)
+![alt text](./assets/DatabaseQueries/GetDonations.PNG)
 
 - To get the donation site with the greatest number of donations:
 
 ![alt text](./assets/DatabaseQueries/GetMostDonations.PNG)
+
+Here are the queries inside of HospitalDAOImp.java:
+
+- To get the entire list of hospitals:
+
+![alt text](./assets/DatabaseQueries/Hospital - GetList.PNG)
+
+- To get a particular hospital:
+
+![alt text](./assets/DatabaseQueries/Hospital - GetById.PNG)
+
+- To get the list of donations of a particular blood type at a particular hospital:
+
+![alt text](./assets/DatabaseQueries/Hospital - GetDonationByBloodType.PNG)
+
+- To get the hospital with the greatest number of donations of a certain blood type:
+
+![alt text](./assets/DatabaseQueries/Hospital - GetWithMostBloodType.PNG)
 
 ## Mid tier APIs
 The APIS are disributed across three classes: DonationController, DonationSiteController, and HospitalController. <br><br>
