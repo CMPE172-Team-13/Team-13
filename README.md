@@ -62,6 +62,14 @@ Open http://localhost:3000 to view it in the browser.
 Start the server:
 <br>`mvn clean install`<br>`mvn spring-boot:run` 
 
+## Sequence Diagrams
+For our application, we only used one POST request to save the donation and the rest were GET requests. Aside from the naming, all of our GET requests followed the same format. Below is the sequence diagram for the POST request and an example of a GET request from our application.
+
+![alt text](./assets/Sequence Diagram for POST.png.png)
+
+![alt text](./assets/Sequence Diagram for GET.png.png)
+
+
 ## Schema
 
 ![alt text](./assets/BloodDonationERD.png)
@@ -74,15 +82,15 @@ Here are the queries inside of DonationDAOImp.java:
 
 - To get the entire list of donations:
 
-![alt text](./assets/DatabaseQueries/Donation - GetList.PNG)
+![alt text](./assets/DatabaseQueries/DonationGetList.PNG)
 
 - To get a particular donation:
 
-![alt text](./assets/DatabaseQueries/Donation - GetById.PNG)
+![alt text](./assets/DatabaseQueries/DonationGetById.PNG)
 
 - To save donation:
 
-![alt text](./assets/DatabaseQueries/Donation - Save.PNG)
+![alt text](./assets/DatabaseQueries/DonationSave.PNG)
 
 Here are the queries inside of DonationSiteDAOImp.java:
 - To get the entire list of donation sites:
@@ -109,19 +117,19 @@ Here are the queries inside of HospitalDAOImp.java:
 
 - To get the entire list of hospitals:
 
-![alt text](./assets/DatabaseQueries/Hospital - GetList.PNG)
+![alt text](./assets/DatabaseQueries/HospitalGetList.PNG)
 
 - To get a particular hospital:
 
-![alt text](./assets/DatabaseQueries/Hospital - GetById.PNG)
+![alt text](./assets/DatabaseQueries/HospitalGetById.PNG)
 
 - To get the list of donations of a particular blood type at a particular hospital:
 
-![alt text](./assets/DatabaseQueries/Hospital - GetDonationByBloodType.PNG)
+![alt text](./assets/DatabaseQueries/HospitalGetDonationByBloodType.PNG)
 
 - To get the hospital with the greatest number of donations of a certain blood type:
 
-![alt text](./assets/DatabaseQueries/Hospital - GetWithMostBloodType.PNG)
+![alt text](./assets/DatabaseQueries/HospitalGetWithMostBloodType.PNG)
 
 ## Mid tier APIs
 The APIS are disributed across three classes: DonationController, DonationSiteController, and HospitalController. <br><br>
