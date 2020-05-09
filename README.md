@@ -23,11 +23,11 @@ From that same page, there are buttons to view data specific to each hospital an
 On each specific page of either a donation site or hospital, when a user scrolls above the month region, more information on which blood type was donated will be shown.
 Below is an example of data for a hospital.
 
-![alt text](./assets/HosAnalytics.png)
+![alt text](./assets/AnalyticsHospital.PNG)
 
 Here is an example of data for a donation site.
 
-![alt text](./assets/SiteAnalytics.PNG)
+![alt text](./assets/AnalyticsDonationSite.PNG)
 
 ## Setup Environment
 In order to run the project locally, you must have the following software installed: <br>
@@ -65,9 +65,9 @@ Start the server:
 ## Sequence Diagrams
 For our application, we only used one POST request to save the donation and the rest were GET requests. Aside from the naming, all of our GET requests followed the same format. Below is the sequence diagram for the POST request and an example of a GET request from our application.
 
-![alt text](./assets/Sequence Diagram for POST.png.png)
+![alt text](./assets/SequenceDiagramPOST.png)
 
-![alt text](./assets/Sequence Diagram for GET.png.png)
+![alt text](./assets/SequenceDiagramGET.png)
 
 
 ## Schema
